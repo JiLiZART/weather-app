@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import {
+	breakpointMobile,
 	colorGray500,
 	colorInputGray300,
 	colorLight,
@@ -35,7 +36,7 @@ const BaseInput = styled.input`
 	box-shadow: none;
 	background: transparent;
 	-webkit-appearance: none;
-	min-width: 272px;
+	min-width: 100%;
 	display: flex;
 
 	font-family: ${fontSeconday};
@@ -51,6 +52,10 @@ const BaseInput = styled.input`
 	::selection {
 		color: ${colorLight};
 		background: ${colorPurple100};
+	}
+	
+	@media (min-width: ${breakpointMobile}) {
+		min-width: 272px;
 	}
 `;
 

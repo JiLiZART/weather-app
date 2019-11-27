@@ -10,6 +10,12 @@ const defaultItems = {
 	1: {
 		id: 1,
 		title: 'London, GB',
+		temp: '32°C',
+		weather: 'Broken clouds',
+		humidity: '76%',
+		pressure: '1026 hPa',
+		wind: '3,4 m/s',
+		icon: 'http://openweathermap.org/img/wn/09d@2x.png',
 		meta: '37.129, -84.0833'
 	},
 	2: {

@@ -22,3 +22,5 @@ export const sizeLg = `20px`;
 export const sizeXl = `24px`;
 export const sizeXxl = `32px`;
 export const sizeXxxl = `48px`;
+
+export const breakpointMobile = `768px`;

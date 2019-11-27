@@ -27,6 +27,7 @@ const Title = styled.div`
 const Content = styled.div`
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap-reverse;
 `;
 
 const Description = styled.div`
