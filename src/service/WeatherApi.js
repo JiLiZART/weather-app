@@ -34,6 +34,10 @@ export class WeatherApi {
 			}
 		});
 	}
+
+	getIcon(name) {
+		return `http://openweathermap.org/img/wn/${name}@2x.png`;
+	}
 }
 
 export default new WeatherApi({
