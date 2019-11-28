@@ -1,15 +1,13 @@
 import withWeatherReducer from './withWeatherReducer';
 import storage from '../service/Storage';
-import api from '../service/WeatherApi';
 
 const state = storage.getData();
 
-const normalizeItem = item => ({ ...item });
 
 const defaultItems = {
 	1: {
 		id: 1,
-		title: 'London, GB',
+		title: 'Moscow',
 		temp: '32°C',
 		weather: 'Broken clouds',
 		humidity: '76%',
@@ -30,12 +28,7 @@ export default function withWeather() {
 
 	return {
 		addByName: (text) => {
-			api.queryCity({ text }).then(item => {
-				add({
-					...normalizeItem(item),
-					created: Date.now()
-				});
-			});
+
 		},
 		removeById: (id) => {
 			remove({ id });
