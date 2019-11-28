@@ -34,6 +34,7 @@ const size = {
 };
 
 const Body = styled.button`
+	label: button;
 	appearance: none;
 	-webkit-appearance: none;
 	text-align: center;
@@ -53,13 +54,25 @@ const Body = styled.button`
 	font-family: inherit;
 	text-decoration: none;
 	background: ${props => type[props.type][props.state].background};
-	border: ${props => type[props.type][props.state].border}
+	border: ${props => type[props.type][props.state].border};
+	border-radius: ${props => props.rounded ? '50%' : '8px'};
+
+	:hover {
+		cursor: ${props => props.onClick ? 'pointer' : 'default'};
+		background: ${props => colors[props.state]};
+	}
 `;
 
-const Button = ({ children, state, type = 'solid' }) => (
-	<Body state={state} type={type}>
+const Button = ({ children, rounded, state = 'primary', type = 'solid' }) => (
+	<Body state={state} type={type} rounded={rounded}>
 		{children}
 	</Body>
 );
+
+Button.Secondary = ({ children, ...props }) => (
+	<Button {...props} state="secondary">{children}</Button>
+);
+
+Button.Secondary.displayName = 'Button.Secondary';
 
 export default Button;
