@@ -15,6 +15,7 @@ export const fontSizePrimary = `36px`;
 export const fontSizeSecondary = `16px`;
 export const fontSizeThird = `14px`;
 
+export const sizeXxs = `4px`;
 export const sizeXs = `8px`;
 export const sizeSm = `12px`;
 export const sizeMd = `16px`;
