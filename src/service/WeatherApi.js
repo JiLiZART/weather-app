@@ -12,7 +12,8 @@ export class WeatherApi {
 	fetch({ uri, payload }) {
 		return fetch(`${this.baseUri}${uri}?${qs.stringify({
 			...payload,
-			appid: this.apiKey
+			appid: this.apiKey,
+			units: 'metric'
 		})}`).then(res => res.json());
 	}
 
@@ -32,11 +33,35 @@ export class WeatherApi {
 			payload: {
 				q: text
 			}
+		}).then(item => {
+			if (item.cod === '200') {
+				return this.normalizeItem(item);
+			}
+
+			return {
+				status: false,
+				error: { title: `City called “${text}” was not found`, text: 'Try different city name' }
+			};
 		});
 	}
 
 	getIcon(name) {
 		return `http://openweathermap.org/img/wn/${name}@2x.png`;
+	}
+
+	normalizeItem(item) {
+		return ({
+			status: parseInt(item.cod, 10),
+			id: item.id,
+			title: item.name,
+			temp: `${item.main.temp}°C`,
+			weather: item.weather[0].description,
+			humidity: `${item.main.humidity}%`,
+			pressure: `${item.main.pressure} hPa`,
+			wind: `${item.wind.speed} m/s`,
+			icon: this.getIcon(item.weather[0]),
+			meta: `${item.coord.lon}, ${item.coord.lat}`
+		});
 	}
 }
 
