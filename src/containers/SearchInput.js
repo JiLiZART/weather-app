@@ -21,19 +21,21 @@ const SearchInput = compose(
 	),
 	withHandlers({
 		onChange: props => e => {
-			props.setValue(e.target.value);
+			const { value } = e.target;
+
+			props.setValue(value);
 
 			if (props.onChange) {
-				props.onChange(e.target.value);
+				props.onChange(value);
 			}
 		},
 		onAutocompleteChange: props => ({ index }) => {
 			const item = props.data[index];
 
-			props.setValue(item.title);
+			props.setValue('');
 
 			if (props.onAutocompleteChange) {
-				props.onAutocompleteChange({ item, index });
+				props.onAutocompleteChange({ index, item });
 			}
 		}
 	})

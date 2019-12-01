@@ -1,5 +1,4 @@
 import React from 'react';
-import memorize from 'fast-memoize';
 import compose from 'recompose/compose';
 import branch from 'recompose/branch';
 import renderComponent from 'recompose/renderComponent';
@@ -9,16 +8,14 @@ import Icon from '../components/icon/Icon';
 import Loader from '../components/loader/Loader';
 import NotFound from '../components/notFound/NotFound';
 
-const onClickHandler = memorize((props, index, item) => props.onItemClick({ index, item }));
-
 const AutocompleteMenu = compose(
 	branch(
 		props => props.isLoading,
 		renderComponent(Loader)
 	),
 	branch(
-		props => props.data && props.data.length === 0,
-		renderComponent(({ error }) => <NotFound title={error} />)
+		props => props.items && props.items.length === 0,
+		renderComponent(NotFound)
 	)
 )(Menu);
 
@@ -29,7 +26,7 @@ const renderItem = ({ item, index, isActive, props }) =>
 			key={index}
 			Action={<Icon.Add />}
 			isActive={isActive}
-			onClick={onClickHandler(props, index, item)}
+			onClick={() => props.onItemClick({ index, item })}
 		/>
 	);
 
