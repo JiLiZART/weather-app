@@ -1,7 +1,4 @@
 import qs from 'query-string';
-// process.env.API_KEY
-
-// weather?q=London,uk&appid=3f6dbae327db9aade442178c52035923
 
 export class WeatherApi {
 	constructor({ apiKey, baseUri }) {
@@ -9,22 +6,30 @@ export class WeatherApi {
 		this.baseUri = baseUri;
 	}
 
-	fetch({ uri, payload }) {
-		return fetch(`${this.baseUri}${uri}?${qs.stringify({
+	asUrl({ uri, payload }) {
+		return `${this.baseUri}${uri}?${qs.stringify({
 			...payload,
 			appid: this.apiKey,
 			units: 'metric'
-		})}`).then(res => res.json());
+		})}`;
+	}
+
+	fetch({ uri, payload }) {
+		return fetch(this.asUrl({ uri, payload })).then(res => res.json());
 	}
 
 	queryCitiesByIds({ ids = [] }) {
+		if (!ids.length) {
+			return Promise.resolve([]);
+		}
+
 		return this.fetch({
 			uri: 'group',
 			payload: {
 				units: 'metric',
 				id: ids.join(',')
 			}
-		});
+		}).then(({ list }) => list.map(item => this.normalizeItem(item))).catch(err => console.warn(err));
 	}
 
 	queryCity({ text }) {
@@ -34,15 +39,15 @@ export class WeatherApi {
 				q: text
 			}
 		}).then(item => {
-			if (item.cod === '200') {
+			if (item.cod === 200) {
 				return this.normalizeItem(item);
 			}
 
 			return {
 				status: false,
-				error: { title: `City called “${text}” was not found`, text: 'Try different city name' }
+				error: true
 			};
-		});
+		}).catch(err => console.warn(err));
 	}
 
 	getIcon(name) {
@@ -59,7 +64,7 @@ export class WeatherApi {
 			humidity: `${item.main.humidity}%`,
 			pressure: `${item.main.pressure} hPa`,
 			wind: `${item.wind.speed} m/s`,
-			icon: this.getIcon(item.weather[0]),
+			icon: this.getIcon(item.weather[0].icon),
 			meta: `${item.coord.lon}, ${item.coord.lat}`
 		});
 	}

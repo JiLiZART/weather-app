@@ -4,13 +4,13 @@ export class Storage {
 		this.key = key;
 	}
 
-	setData(data) {
+	setIds(data = []) {
 		this.driver.setItem(this.key, JSON.stringify(data));
 	}
 
-	getData() {
-		return this.driver.getItem(this.key);
+	getIds() {
+		return JSON.parse(this.driver.getItem(this.key) || false) || [];
 	}
 }
 
-export default new Storage({ driver: window.localStorage, key: 'default' });
+export default new Storage({ driver: window.localStorage, key: 'weather_ids' });
