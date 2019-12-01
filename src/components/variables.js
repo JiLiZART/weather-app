@@ -7,8 +7,8 @@ export const colorGray500 = '#272525';
 export const colorLight = '#FFFFFF';
 export const colorPurple100 = '#730641';
 
-export const fontPrimary = `Merriweather`;
-export const fontSeconday = `PT Root UI`;
+export const fontPrimary = `Merriweather, -apple-system, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, Noto Sans, sans-serif`;
+export const fontSeconday = `PT Root UI, -apple-system, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, Noto Sans, sans-serif`;
 
 export const fontSizeHero = `48px`;
 export const fontSizePrimary = `36px`;

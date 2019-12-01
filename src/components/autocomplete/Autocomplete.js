@@ -80,10 +80,11 @@ export default compose(
 		onEnter: props => () => {
 			props.onAutocompleteChange({ index: props.index, data: props.data });
 		},
-		onSetIndex: props => ({ index }) => {
+		onSetIndex: props => ({ index, ...rest }) => {
 			if (props.data[index]) {
 				props.changeSearchIndex(index);
 				props.onAutocompleteChange({ index, data: props.data });
+				console.log('onAutocompleteChange');
 			}
 		}
 	}),

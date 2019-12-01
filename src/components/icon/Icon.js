@@ -1,12 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled';
-
-const Icon = styled.div`
-	label: icon;
-	display: flex;
-	width: 24px;
-	height: 24px;
-`;
+import { Icon } from './iconStyles';
 
 Icon.Search = (props) => (
 	<Icon {...props}>

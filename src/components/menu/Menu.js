@@ -7,7 +7,7 @@ const Body = styled.div`
 	flex-direction: column;
 `;
 
-const Menu = ({ items, renderItem, activeIndex, ...props }) => (
+const Menu = ({ items = [], renderItem, activeIndex, ...props }) => (
 	<Body>
 		{items.map((item, index) => renderItem({ index, isActive: activeIndex === index, item, props }))}
 	</Body>
