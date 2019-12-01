@@ -1,7 +1,8 @@
-import { css, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
+
 import {
-	breakpointMobile, colorGray300,
+	breakpointMobile,
+	colorGray300,
 	colorGray400,
 	colorGray500,
 	colorPurple100,
@@ -14,30 +15,21 @@ import {
 	sizeXxs
 } from '../variables';
 
+export const Body = styled.div`
+	label: card;
+	position: relative;
+	width: 100%;
+	max-width: 100%;
 
-export const remove = keyframes`
-  from {
-    transform: scale(1, 1);
-  }
-  
-  30% {
-    transform: scale(1.1, 1.1);
-  }
-
-  99% {
-    transform: scale(0, 0);
-    height: 0;
-  }
-  
-  to {
-    height: 0;
-    opacity: 0;
-  }
+	background: #FFFFFF;
+	border-radius: 24px;
+	transition: transform .2s ease-in-out;
+	margin-bottom: 24px;
+	
+	@media (min-width: ${breakpointMobile}) {
+		max-width: 480px;
+	}
 `;
-
-export const removeCss = props => props.isRemoved ? css`
-  animation: 0.3s ease-in-out 0.1s ${remove}
-` : null;
 
 export const Header = styled.div`
 	label: header;
@@ -92,23 +84,6 @@ export const Type = styled.div`
 	font-size: ${fontSizeThird};
 	line-height: 1.43;
 	color: ${colorGray400};
-`;
-
-export const Body = styled.div`
-	label: card;
-	position: relative;
-	width: 100%;
-	max-width: 100%;
-
-	background: #FFFFFF;
-	border-radius: 24px;
-	transition: transform .2s ease-in-out;
-	margin-bottom: 24px;
-	${removeCss}
-	
-	@media (min-width: ${breakpointMobile}) {
-		max-width: 480px;
-	}
 `;
 
 export const Meta = styled.div`
