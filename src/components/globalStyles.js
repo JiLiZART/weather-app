@@ -1,7 +1,10 @@
 import { css } from '@emotion/core';
 import { colorGray300 } from './variables';
 
-export default css`
+const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+const isSlowConnection = connection && connection.effectiveType === 'cellular';
+
+const fontsCss = css`
 	/* latin */
 	@font-face {
 	  font-family: 'PT Root UI';
@@ -39,6 +42,10 @@ export default css`
 	  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
 	  font-display: swap;
 	}
+`;
+
+export default css`
+	${!isSlowConnection && fontsCss}
 
 	body {
 		min-height: 100%;
