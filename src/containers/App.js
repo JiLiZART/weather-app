@@ -29,6 +29,10 @@ const App = () => {
 		queryAutocomplete, clearAutocomplete, autocompleteItems, isAutocompleteLoading, autocompleteError
 	} = withWeatherAutocomplete();
 
+	const onChange = useCallback((value) => {
+		queryAutocomplete(value);
+	}, []);
+
 	const onAutocompleteChange = useCallback(({ item }) => {
 		add(item);
 		clearAutocomplete();
@@ -44,7 +48,7 @@ const App = () => {
 				styles={globalStyles}
 			/>
 			<Header>
-				<Logo/>
+				<Logo />
 			</Header>
 			<Hero title="Weather forecast"
 				  description="Simple but powerful weather forcasting service based on OpenWeatherMap API"
@@ -56,12 +60,12 @@ const App = () => {
 						  error={autocompleteError}
 						  isLoading={isAutocompleteLoading}
 						  renderAutocomplete={renderAutocomplete}
-						  onChange={queryAutocomplete}
+						  onChange={onChange}
 						  onAutocompleteChange={onAutocompleteChange}
 					  />
 				  }
 			/>
-			<CardList items={items} onItemRemove={onItemRemove}/>
+			<CardList items={items} onItemRemove={onItemRemove} />
 		</Layout>
 	);
 };
