@@ -35,14 +35,11 @@
   "dependencies": {
     "@emotion/core": "10.0.22",
     "@emotion/styled": "10.0.23",
-    "fast-memoize": "^2.5.1",
     "preact": "^10.0.1",
     "preact-render-to-string": "^5.1.0",
     "preact-router": "^3.0.0",
     "query-string": "^6.9.0",
     "react-app-env": "^1.2.3",
-    "react-beautiful-dnd": "12.1.1",
-    "react-transition-group": "4.3.0",
     "recompose": "0.30.0"
   },
   "jest": {
