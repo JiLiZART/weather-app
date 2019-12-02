@@ -2,26 +2,9 @@ import React from 'react';
 import compose from 'recompose/compose';
 import withStateHandlers from 'recompose/withStateHandlers';
 import withHandlers from 'recompose/withHandlers';
-import styled from '@emotion/styled';
-
-const Wrapper = styled.div`
-	position: relative;
-`;
-
-const Body = styled.div`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-`;
-
-const Autocomlete = styled.div`
-	position: absolute;
-	left: 0;
-	top: 8px;
-	width: 100%;
-	z-index: 11;
-`;
+import { KEY_ARROW_DOWN, KEY_ARROW_UP, KEY_ENTER, KEY_ESC } from '../../helpers/keycodes';
+import { createExecuteMap, preventedEvent } from '../../helpers/event';
+import { Autocomlete, Body, Wrapper } from './autocompleteStyles';
 
 const Autocomplete = ({ children, renderAutocomplete, isFocused, ...props }) => (
 	<Body>
@@ -33,21 +16,6 @@ const Autocomplete = ({ children, renderAutocomplete, isFocused, ...props }) => 
 		)}
 	</Body>
 );
-
-const preventedEvent = callback => e => {
-	const nativeEvent = e.nativeEvent || e;
-	nativeEvent.preventDefault();
-	callback(nativeEvent);
-};
-
-const createExecuteMap = ({ map, key, props }) => {
-	map[key] && map[key](...props);
-};
-
-const KEY_ARROW_UP = 38;
-const KEY_ARROW_DOWN = 40;
-const KEY_ENTER = 13;
-const KEY_ESC = 27;
 
 const defaultSearchIndex = -1;
 const getSearchIndex = ({ index, deviation, data }) => {
@@ -84,7 +52,6 @@ export default compose(
 			if (props.data[index]) {
 				props.changeSearchIndex(index);
 				props.onAutocompleteChange({ index, data: props.data });
-				console.log('onAutocompleteChange');
 			}
 		}
 	}),
