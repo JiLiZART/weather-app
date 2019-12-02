@@ -11,14 +11,17 @@ import globalStyles from '../components/globalStyles';
 import withWeatherAutocomplete from '../hooks/withWeatherAutocomplete';
 import CardList from './CardList';
 
-const renderAutocomplete = ({ index, data, error, value, onSetIndex, isLoading }) => value &&
-	<WeatherAutocomleteList
-		onItemClick={onSetIndex}
-		data={data}
-		error={error}
-		activeIndex={index}
-		isLoading={isLoading}
-	/>;
+const renderAutocomplete = ({ index, data, error, value, onSetIndex, isLoading }) =>
+	(
+		<WeatherAutocomleteList
+			onItemClick={onSetIndex}
+			value={value}
+			data={data}
+			error={error}
+			activeIndex={index}
+			isLoading={isLoading}
+		/>
+	);
 
 const App = () => {
 	const { add, items, removeById } = withWeatherList();
@@ -47,6 +50,7 @@ const App = () => {
 				  description="Simple but powerful weather forcasting service based on OpenWeatherMap API"
 				  Actions={
 					  <SearchInput
+						  autofocus
 						  placeholder="Search"
 						  data={autocompleteItems}
 						  error={autocompleteError}

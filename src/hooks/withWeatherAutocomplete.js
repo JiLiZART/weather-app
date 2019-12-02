@@ -12,8 +12,8 @@ export default function withWeatherAutocomplete() {
 		});
 
 		if (text) {
-			findByName(text).then((item) => {
-				if (!item.status) {
+			findByName(text).then(({ status, data }) => {
+				if (!status) {
 					setData({
 						items: [],
 						error: {
@@ -25,7 +25,7 @@ export default function withWeatherAutocomplete() {
 				}
 				else {
 					setData({
-						items: [item],
+						items: data,
 						error: null,
 						isLoading: false
 					});

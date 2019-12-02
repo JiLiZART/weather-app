@@ -9,7 +9,7 @@ export class WeatherApi {
 	asUrl({ uri, payload }) {
 		return `${this.baseUri}${uri}?${qs.stringify({
 			...payload,
-			appid: this.apiKey,
+			APPID: this.apiKey,
 			units: 'metric'
 		})}`;
 	}
@@ -29,24 +29,38 @@ export class WeatherApi {
 				units: 'metric',
 				id: ids.join(',')
 			}
-		}).then(({ list }) => list.map(item => this.normalizeItem(item))).catch(err => console.warn(err));
+		}).then(({ list }) => ({
+			status: true,
+			data: list.map(item => this.normalizeItem(item))
+		})).catch(err => console.warn(err));
 	}
 
-	queryCity({ text }) {
+	queryCity({ text, count = 3 }) {
+		const error = {
+			status: false,
+			error: true
+		};
+
+		if (!text) {
+			return Promise.resolve(error);
+		}
+
 		return this.fetch({
-			uri: 'weather',
+			uri: 'find',
 			payload: {
-				q: text
+				q: text,
+				type: 'like',
+				cnt: count
 			}
-		}).then(item => {
-			if (item.cod === 200) {
-				return this.normalizeItem(item);
+		}).then(({ cod, list }) => {
+			if (parseInt(cod, 10) === 200) {
+				return {
+					status: true,
+					data: list.map(item => this.normalizeItem(item))
+				};
 			}
 
-			return {
-				status: false,
-				error: true
-			};
+			return error;
 		}).catch(err => console.warn(err));
 	}
 
@@ -58,7 +72,7 @@ export class WeatherApi {
 		return ({
 			status: parseInt(item.cod, 10),
 			id: item.id,
-			title: item.name,
+			title: `${item.name}, ${item.sys.country}`,
 			temp: `${item.main.temp}°C`,
 			weather: item.weather[0].description,
 			humidity: `${item.main.humidity}%`,
@@ -72,5 +86,5 @@ export class WeatherApi {
 
 export default new WeatherApi({
 	apiKey: '3f6dbae327db9aade442178c52035923',
-	baseUri: 'https://api.openweathermap.org/data/2.5/'
+	baseUri: '//api.openweathermap.org/data/2.5/'
 });

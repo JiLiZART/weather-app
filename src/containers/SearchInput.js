@@ -7,7 +7,7 @@ import withStateHandlers from 'recompose/withStateHandlers';
 import AutocompleteInput from '../components/autocomplete/AutocompleteInput';
 
 const SearchButton = () => (
-	<Button state="primary"><Icon.Search /></Button>
+	<Button state="primary" tabIndex="-1"><Icon.Search /></Button>
 );
 
 const SearchInput = compose(

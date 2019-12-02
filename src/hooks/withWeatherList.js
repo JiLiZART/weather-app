@@ -8,12 +8,20 @@ export default function withWeatherList() {
 	const { items, add, remove } = withWeatherReducer({ items: [], ids: [] });
 	const { findByIds } = withWeatherFetch();
 	const { storedIds, storeId, clearStoredId } = withWeatherStorage();
-	const addByIds = ids => findByIds(ids).then(items => items.forEach(addToList));
+	const addByIds = ids => findByIds(ids).then(({ status, data }) => {
+		if (status) {
+			data.forEach(addToList);
+		}
+	});
 	const addToList = useCallback((item) => {
 		const id = item.id;
 
 		doEveryMinute((id) => {
-			findByIds([id]).then(items => items.forEach(add));
+			findByIds([id]).then(({ status, data }) => {
+				if (status) {
+					data.forEach(add);
+				}
+			});
 		}, id);
 
 		storeId(id);
