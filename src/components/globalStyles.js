@@ -2,7 +2,7 @@ import { css } from '@emotion/core';
 import { colorGray300 } from './variables';
 
 const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-const isSlowConnection = connection && connection.effectiveType === 'cellular';
+const isSlowConnection = connection && connection.effectiveType === '2g';
 
 const fontsCss = css`
 	/* latin */
