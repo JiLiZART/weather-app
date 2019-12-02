@@ -5,11 +5,14 @@ import {
 	colorGray300,
 	colorGray400,
 	colorGray500,
+	colorLight,
 	colorPurple100,
 	fontSeconday,
-	fontSizeHero, fontSizeSecondary,
+	fontSizeHero,
+	fontSizeSecondary,
 	fontSizeThird,
-	sizeLg, sizeMd,
+	sizeLg,
+	sizeMd,
 	sizeXl,
 	sizeXxl,
 	sizeXxs
@@ -21,10 +24,14 @@ export const Body = styled.div`
 	width: 100%;
 	max-width: 100%;
 
-	background: #FFFFFF;
-	border-radius: 24px;
-	transition: transform .2s ease-in-out;
-	margin-bottom: 24px;
+	background: ${colorLight};
+	border-radius: ${sizeXl};
+	margin-bottom: ${sizeXl};
+
+	:focus {
+		outline: none;
+		box-shadow: 0 0 2px ${colorGray400};
+	}
 	
 	@media (min-width: ${breakpointMobile}) {
 		max-width: 480px;
