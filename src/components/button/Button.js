@@ -1,8 +1,8 @@
 import React from 'react';
 import { Body } from './buttonStyles';
 
-const Button = ({ children, rounded, state = 'primary', type = 'solid', onClick }) => (
-	<Body state={state} type={type} rounded={rounded} onClick={onClick}>
+const Button = ({ children, rounded, state = 'primary', type = 'solid', ...props }) => (
+	<Body {...props} state={state} type={type} rounded={rounded} htmlType="button">
 		{children}
 	</Body>
 );

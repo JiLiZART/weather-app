@@ -3,7 +3,7 @@ import { colorGray300, colorPurple100 } from '../variables';
 
 const colors = {
 	primary: colorPurple100,
-	secondary: colorGray300,
+	secondary: colorGray300
 };
 
 const type = {
@@ -63,5 +63,6 @@ export const Body = styled.button`
 	
 	:focus {
 		outline: none;
+		box-shadow: 0 0 2px ${props => colors[props.state]};
 	}
 `;
