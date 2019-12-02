@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Card } from '../card/Card';
+import Card from '../card/Card';
 import { List } from './cardListStyles';
 
 export const CardList = ({ items, onItemRemove }) => {
@@ -7,7 +7,7 @@ export const CardList = ({ items, onItemRemove }) => {
 
 	return (
 		<List>
-			{items.map(item => <Card {...item} onRemove={onRemove(item)} />)}
+			{items.map((item, idx) => <Card {...item} key={idx} index={idx} onRemove={onRemove(item)} />)}
 		</List>
 	);
 };
