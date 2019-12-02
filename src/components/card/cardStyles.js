@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 import {
 	breakpointMobile,
+	breakpointTablet,
 	colorGray300,
 	colorGray400,
 	colorGray500,
@@ -32,8 +33,12 @@ export const Body = styled.div`
 		outline: none;
 		box-shadow: 0 0 2px ${colorGray400};
 	}
-	
+
 	@media (min-width: ${breakpointMobile}) {
+		max-width: calc(50% - ${sizeMd});
+	}
+
+	@media (min-width: ${breakpointTablet}) {
 		max-width: 480px;
 	}
 `;

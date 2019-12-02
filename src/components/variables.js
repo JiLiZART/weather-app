@@ -24,4 +24,5 @@ export const sizeXl = `24px`;
 export const sizeXxl = `32px`;
 export const sizeXxxl = `48px`;
 
-export const breakpointMobile = `768px`;
+export const breakpointMobile = `767.98px`;
+export const breakpointTablet = `991.98px`;
