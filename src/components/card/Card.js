@@ -9,7 +9,7 @@ import { KEY_BACKSPACE } from '../../helpers/keycodes';
 
 export const Card = ({ title, temp, weather, wind, humidity, pressure, icon, onKeyDown, onRemove }) => (
 	<Body onKeyDown={onKeyDown} tabIndex="0">
-		<Header tabIndex="-1">
+		<Header>
 			<Title>{title}</Title>
 			<Temp>
 				<TempName>{temp}</TempName>
@@ -20,7 +20,7 @@ export const Card = ({ title, temp, weather, wind, humidity, pressure, icon, onK
 				<Button.Secondary tabIndex="-1" type="outline" rounded onClick={onRemove}><Icon.Remove /></Button.Secondary>
 			</Actions>
 		</Header>
-		<Meta tabIndex="-1">
+		<Meta>
 			<MetaItem><Icon.Wind />{wind}</MetaItem>
 			<MetaItem><Icon.Humidity />{humidity}</MetaItem>
 			<MetaItem><Icon.Pressure />{pressure}</MetaItem>
