@@ -7,7 +7,7 @@ import {
 	fontSizePrimary,
 	fontSizeSecondary,
 	sizeMd, sizeXs,
-	sizeXxl
+	sizeXxl, sizeXxs
 } from '../variables';
 
 export const Body = styled.div`
@@ -22,8 +22,10 @@ export const Title = styled.div`
 	font-weight: normal;
 	font-size: ${fontSizePrimary};
 	line-height: 1;
+	letter-spacing: 0.2px;
 	color: ${colorGray500};
 	margin-bottom: ${sizeXs};
+	margin-top: -${sizeXxs};
 	text-align: center;
 
 	@media (min-width: ${breakpointMobile}) {
@@ -46,6 +48,7 @@ export const Description = styled.div`
 	font-weight: normal;
 	font-size: ${fontSizeSecondary};
 	line-height: 1.5;
+	letter-spacing: 0.2px;
 	color: ${colorGray400};
 	max-width: 480px;
 	margin-bottom: ${sizeXs};
