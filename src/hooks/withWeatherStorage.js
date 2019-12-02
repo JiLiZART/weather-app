@@ -2,12 +2,10 @@ import storage from '../service/Storage';
 import { remove, uniqIds } from '../helpers/array';
 
 export default function withWeatherStorage() {
-	const storedIds = storage.getIds();
-
 	return {
-		storedIds,
+		storedIds: storage.getIds(),
 		storeId(id) {
-			storage.setIds(uniqIds([...storedIds, id]));
+			storage.setIds(uniqIds([...storage.getIds(), id]));
 		},
 		clearStoredId(id) {
 			storage.setIds(remove(storage.getIds(), id));
