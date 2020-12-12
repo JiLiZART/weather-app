@@ -50,6 +50,7 @@ export const Description = styled.div`
 	line-height: 1.5;
 	letter-spacing: 0.2px;
 	color: ${colorGray400};
+	width: 100%;
 	max-width: 480px;
 	margin-bottom: ${sizeXs};
 	text-align: center;

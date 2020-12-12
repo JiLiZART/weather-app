@@ -38,7 +38,7 @@ export const Body = styled.button`
 	-webkit-appearance: none;
 	text-align: center;
 	justify-content: center;
-	background-color: transparent;
+	background: transparent;
 	cursor: default;
 	display: inline-flex;
 	align-items: center;
@@ -55,6 +55,7 @@ export const Body = styled.button`
 	background: ${props => type[props.type][props.state].background};
 	border: ${props => type[props.type][props.state].border};
 	border-radius: ${props => props.rounded ? '50%' : '0px'};
+	transition: background 250ms ease-in;
 
 	:hover {
 		cursor: ${props => props.onClick ? 'pointer' : 'default'};

@@ -13,4 +13,10 @@ Button.Secondary = ({ children, ...props }) => (
 
 Button.Secondary.displayName = 'Button.Secondary';
 
+Button.Primary = ({ children, ...props }) => (
+	<Button {...props} state="primary">{children}</Button>
+);
+
+Button.Primary.displayName = 'Button.Primary';
+
 export default Button;

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const List = styled.div`
+export const List = styled.section`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

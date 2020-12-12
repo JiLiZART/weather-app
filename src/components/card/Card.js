@@ -1,50 +1,47 @@
-import React from 'react';
-import compose from 'recompose/compose';
-import withHandlers from 'recompose/withHandlers';
+import React, { useCallback } from 'react';
 import Icon from '../icon/Icon';
 import Button from '../button/Button';
-import { Actions, Body, Header, Meta, MetaItem, Temp, TempImage, TempName, Title, Type } from './cardStyles';
+import { Actions, Body, Header, Meta, MetaItem, Temp, TempImage, TempName, Title, Type, transitions } from './cardStyles';
 import { createExecuteMap, preventedEvent } from '../../helpers/event';
 import { KEY_BACKSPACE } from '../../helpers/keycodes';
 
-export const Card = ({ title, temp, weather, wind, humidity, pressure, icon, onKeyDown, onRemove }) => (
-	<Body onKeyDown={onKeyDown} tabIndex="0">
-		<Header>
-			<Title>{title}</Title>
-			<Temp>
-				<TempName>{temp}</TempName>
-				<TempImage src={icon} />
-			</Temp>
-			<Type>{weather}</Type>
-			<Actions>
-				<Button.Secondary tabIndex="-1" type="outline" rounded onClick={onRemove}><Icon.Remove /></Button.Secondary>
-			</Actions>
-		</Header>
-		<Meta>
-			<MetaItem><Icon.Wind />{wind}</MetaItem>
-			<MetaItem><Icon.Humidity />{humidity}</MetaItem>
-			<MetaItem><Icon.Pressure />{pressure}</MetaItem>
-		</Meta>
-	</Body>
-);
+export const Card = ({ title, temp, weather, wind, humidity, pressure, icon, onRemove }) => {
+	const onBackspace = useCallback((e) => {
+		if (onRemove) {
+			onRemove(e);
+		}
+	}, [onRemove]);
 
-export default compose(
-	withHandlers({
-		onBackspace: props => (e) => {
-			if (props.onRemove) {
-				props.onRemove(e);
-			}
-		}
-	}),
-	withHandlers({
-		onKeyDown: props => (e) => {
-			createExecuteMap({
-				key: e.keyCode,
-				map: {
-					[KEY_BACKSPACE]: preventedEvent(props.onBackspace)
-				},
-				props: [e]
-			});
-		}
-	})
-)(Card);
+	const onKeyDown = useCallback((e) => {
+		createExecuteMap({
+			key: e.keyCode,
+			map: {
+				[KEY_BACKSPACE]: preventedEvent(onBackspace)
+			},
+			props: [e]
+		});
+	}, [onBackspace]);
+
+	return (
+		<Body onKeyDown={onKeyDown} tabIndex="0" transitions={transitions} timeout={500}>
+			<Header>
+				<Title>{title}</Title>
+				<Temp>
+					<TempName>{temp}</TempName>
+					<TempImage src={icon} />
+				</Temp>
+				<Type>{weather}</Type>
+				<Actions>
+					<Button.Secondary tabIndex="-1" type="outline" rounded onClick={onRemove}><Icon.Remove /></Button.Secondary>
+				</Actions>
+			</Header>
+			<Meta>
+				<MetaItem><Icon.Wind />{wind}</MetaItem>
+				<MetaItem><Icon.Humidity />{humidity}</MetaItem>
+				<MetaItem><Icon.Pressure />{pressure}</MetaItem>
+			</Meta>
+		</Body>
+	);
+};
+
+export default Card

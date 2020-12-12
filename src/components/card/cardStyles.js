@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
 import styled from '@emotion/styled';
 
 import {
@@ -5,6 +8,7 @@ import {
 	breakpointTablet,
 	colorGray300,
 	colorGray400,
+	colorGray400T25,
 	colorGray500,
 	colorLight,
 	colorPurple100,
@@ -19,7 +23,32 @@ import {
 	sizeXxs
 } from '../variables';
 
-export const Body = styled.div`
+function getScale(value) {
+	return `scale(${value}, ${value ** 2})`;
+}
+
+export const transitions = {
+	enter: css`
+            opacity: 0;
+            transform: ${getScale(1)};
+          `,
+	enterActive: css`
+            opacity: 1;
+  			transition: opacity 500ms ease-in;
+  			transform: ${getScale(1)};
+          `,
+	exit: css`
+            opacity: 1;
+            transform: ${getScale(1)};
+          `,
+	exitActive: css`
+            opacity: 0;
+            transform: ${getScale(0.75)};
+            transition: opacity 250ms ease-in;
+          `
+};
+
+export const Body = styled.article`
 	label: card;
 	position: relative;
 	width: 100%;
@@ -28,10 +57,11 @@ export const Body = styled.div`
 	background: ${colorLight};
 	border-radius: ${sizeXl};
 	margin-bottom: ${sizeXl};
+	transition: box-shadow 250ms ease-in;
 
-	:focus {
+	:focus-within {
 		outline: none;
-		box-shadow: 0 0 2px ${colorGray400};
+		box-shadow: 0 0 0 0.25rem ${colorGray400T25};
 	}
 
 	@media (min-width: ${breakpointMobile}) {
