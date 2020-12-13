@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 import Icon from '../icon/Icon';
 import Button from '../button/Button';
-import { Actions, Body, Header, Meta, MetaItem, Temp, TempImage, TempName, Title, Type, transitions } from './cardStyles';
+import { Actions, Body, Header, Meta, MetaItem, Temp, TempImage, TempName, Title, Type } from './cardStyles';
 import { createExecuteMap, preventedEvent } from '../../helpers/event';
 import { KEY_BACKSPACE } from '../../helpers/keycodes';
 
-export const Card = ({ title, temp, weather, wind, humidity, pressure, icon, onRemove }) => {
+export const Card = ({ title, temp, weather, wind, humidity, pressure, icon, style, onRemove }) => {
 	const onBackspace = useCallback((e) => {
 		if (onRemove) {
 			onRemove(e);
@@ -23,7 +23,7 @@ export const Card = ({ title, temp, weather, wind, humidity, pressure, icon, onR
 	}, [onBackspace]);
 
 	return (
-		<Body onKeyDown={onKeyDown} tabIndex="0" transitions={transitions} timeout={500}>
+		<Body onKeyDown={onKeyDown} tabIndex="0" style={style}>
 			<Header>
 				<Title>{title}</Title>
 				<Temp>

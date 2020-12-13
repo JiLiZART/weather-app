@@ -24,7 +24,7 @@ const renderAutocomplete = ({ index, data, error, value, onSetIndex, isLoading }
 	);
 
 const App = () => {
-	const { add, items, removeById } = withWeatherList();
+	const { add, items, removeById, hasStoredItems } = withWeatherList();
 	const {
 		queryAutocomplete, clearAutocomplete, autocompleteItems, isAutocompleteLoading, autocompleteError
 	} = withWeatherAutocomplete();
@@ -65,7 +65,7 @@ const App = () => {
 					  />
 				  }
 			/>
-			<CardList items={items} onItemRemove={onItemRemove} />
+			<CardList hasData={hasStoredItems} items={items} onItemRemove={onItemRemove} />
 		</Layout>
 	);
 };

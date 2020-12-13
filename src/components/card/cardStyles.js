@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
+import { animated } from 'react-spring';
 
 import {
 	breakpointMobile,
@@ -23,32 +24,7 @@ import {
 	sizeXxs
 } from '../variables';
 
-function getScale(value) {
-	return `scale(${value}, ${value ** 2})`;
-}
-
-export const transitions = {
-	enter: css`
-            opacity: 0;
-            transform: ${getScale(1)};
-          `,
-	enterActive: css`
-            opacity: 1;
-  			transition: opacity 500ms ease-in;
-  			transform: ${getScale(1)};
-          `,
-	exit: css`
-            opacity: 1;
-            transform: ${getScale(1)};
-          `,
-	exitActive: css`
-            opacity: 0;
-            transform: ${getScale(0.75)};
-            transition: opacity 250ms ease-in;
-          `
-};
-
-export const Body = styled.article`
+export const Body = styled(animated.article)`
 	label: card;
 	position: relative;
 	width: 100%;

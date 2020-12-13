@@ -40,6 +40,7 @@
     "preact-router": "^3.0.0",
     "query-string": "^6.9.0",
     "react-app-env": "^1.2.3",
+    "react-spring": "8.0.27",
     "recompose": "0.30.0"
   },
   "jest": {

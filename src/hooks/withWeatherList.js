@@ -34,6 +34,7 @@ export default function withWeatherList() {
 
 	return {
 		add: addToList,
+		hasStoredItems: storedIds.length > 0,
 		removeById: (id) => {
 			remove({ id });
 			clearInterval(id);
